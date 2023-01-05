@@ -1,0 +1,74 @@
+Cluster Management
+
+kubectl config view: Display the kubectl configuration
+kubectl config set-cluster <cluster-name> --server=<server-url>: Set the server URL for the cluster
+kubectl config set-context <context-name> --cluster=<cluster-name> --user=<user-name>: Set the context for a user and cluster
+kubectl config use-context <context-name>: Set the current context
+kubectl config set-credentials <user-name> --auth-provider=<auth-provider> --auth-provider-arg=<key=value>: Set credentials for a user
+kubectl get nodes: List all nodes in the cluster
+kubectl describe node <node-name>: Show details of a specific node
+kubectl cordon <node-name>: Mark a node as unschedulable
+kubectl uncordon <node-name>: Mark a node as schedulable
+kubectl drain <node-name>: Drain a node in preparation for maintenance
+kubectl top node <node-name>: Show metrics for a specific node
+
+Namespace Management
+
+kubectl get namespaces: List all namespaces
+kubectl create namespace <namespace-name>: Create a new namespace
+kubectl config set-context --current --namespace=<namespace-name>: Set the default namespace for the current context
+
+
+Pod Management
+
+kubectl get pods: List all pods in the current namespace
+kubectl get pods -o wide: List all pods in the current namespace, with more details
+kubectl get pods --all-namespaces: List all pods in all namespaces
+kubectl create -f <pod-definition-file.yaml>: Create a pod from a YAML definition file
+kubectl describe pod <pod-name>: Show details of a specific pod
+kubectl logs <pod-name>: Show logs for a specific pod
+kubectl exec -it <pod-name> <command>: Execute a command in a running pod
+kubectl label pod <pod-name> <key>=<value>: Add a label to a pod
+kubectl get pods -l <key>=<value>: List all pods with a specific label
+kubectl delete pod <pod-name>: Delete a pod
+
+Deployment Management
+
+kubectl get deployments: List all deployments in the current namespace
+kubectl create -f <deployment-definition-file.yaml>: Create a deployment from a YAML definition file
+kubectl describe deployment <deployment-name>: Show details of a specific deployment
+kubectl scale deployment <deployment-name> --replicas=<number-of-replicas>: Scale a deployment to the specified number of replicas
+kubectl rollout status deployment <deployment-name>: Check the rollout status of a deployment
+kubectl rollout history deployment <deployment-name>: View the rollout history of a deployment
+kubectl set image deployment <deployment-name> <container-name>=<image-name>: Update the container image for a deployment
+kubectl rollout undo deployment <deployment-name>: Roll back the latest rollout of a deployment
+kubectl delete deployment <deployment-name>: Delete a deployment
+kubectl rollout undo deployment <deployment-name>: Rollback a deployment to the previous revision
+
+Service Management
+
+kubectl get services: List all services in the current namespace
+kubectl get services -o wide: List all services with more details
+kubectl get svc: Alias for kubectl get services
+kubectl create -f <service-definition-file.yaml>: Create a service from a YAML definition file
+kubectl create service <service-type> <service-name> --tcp=<port>:<target-port>: Create a new service of the specified type
+kubectl describe service <service-name>: Show details of a specific service
+kubectl expose pod <pod-name> --port=<port> --name=<service-name>: Expose a pod as a service
+kubectl expose deployment <deployment-name> --port=<port> --name=<service-name>: Expose a deployment as a service
+kubectl delete service <service-name>: Delete a specific service
+kubectl patch service <service-name> -p '{"spec":{"type":"LoadBalancer"}}': Update the type of a service to be a load balancer.
+kubectl get endpoints <service-name>: List the endpoints for a service.
+kubectl edit service <service-name>: Edit a service
+kubectl expose deployment <deployment-name> --type=<type> --name=<service-name> --port=<port> --target-port=<target-port>: Expose a deployment as a service
+kubectl expose pod <pod-name> --type=<type> --name=<service-name> --port=<port> --target-port=<target-port>: Expose a pod as a service
+
+
+
+
+Service Types
+
+ClusterIP: Exposes the service on a cluster-internal IP. The service is only reachable from within the cluster.
+
+NodePort: Exposes the service on each Node's IP at a static port (the NodePort). A ClusterIP service, to which the NodePort service will route, is automatically created. You'll be able to contact the NodePort service, from outside the cluster, by requesting <NodeIP>:<NodePort>.
+
+LoadBalancer: Exposes the service externally using a cloud provider's load balancer. NodePort and ClusterIP services, to which the external load balancer will route, are automatically created.
