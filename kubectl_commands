@@ -1,0 +1,13 @@
+Here are some kubectl commands that you can use to view logs in Kubernetes:
+
+kubectl logs <pod-name>: This command displays the logs for the specified pod.
+
+kubectl logs <pod-name> -c <container-name>: This command displays the logs for the specified container in the specified pod.
+
+kubectl logs -l <label-selector>: This command displays the logs for all pods that match the specified label selector.
+
+kubectl logs -f <pod-name>: This command displays the logs for the specified pod and follows the log output, similar to the tail -f command.
+
+kubectl logs -p <pod-name>: This command displays the previous logs for the specified pod. This is useful if the pod has been restarted and you want to see the logs from the previous run.
+
+You can also use the --since flag to view logs that were generated after a certain time, and the --tail flag to display only the last N number of lines of the logs. For example, kubectl logs <pod-name> --since=2h --tail=100 will display the last 100 lines of logs that were generated in the past 2 hours.
