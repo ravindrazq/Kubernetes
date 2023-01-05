@@ -1,0 +1,15 @@
+Here are some common kubectl commands for managing deployments in Kubernetes:
+
+kubectl create deployment <deployment-name> --image=<image-name>: This command creates a new deployment with the specified name and container image.
+
+kubectl get deployments: This command lists all deployments in the current namespace.
+
+kubectl describe deployment <deployment-name>: This command displays detailed information about the specified deployment, including the number of replicas, the container image, and the deployment strategy.
+
+kubectl scale deployment <deployment-name> --replicas=<number-of-replicas>: This command scales the specified deployment to the specified number of replicas.
+
+kubectl rollout status deployment <deployment-name>: This command checks the rollout status of the specified deployment.
+
+kubectl set image deployment <deployment-name> <container-name>=<image-name>: This command updates the container image for the specified container in the specified deployment.
+
+kubectl delete deployment <deployment-name>: This command deletes the specified deployment.
